@@ -39,31 +39,7 @@ public class Estado8Puzzle implements Estado {
         return 0;
     }
 
-    private byte[] getIndiceColunaEmBranc() {
-        for (byte i = 0; i < estado.length; i++) {
-            for (byte j = 0; j < estado.length; j++) {
-                if (estado[i][j] == BRANCO)
-                    return new byte[]{i, j};
-            }
-        }
 
-        return new byte[]{-1, -1};
-    }
-
-    private boolean isQuinaEsquerda(byte[] indexes) {
-        byte col = indexes[1];
-        return col == 0;
-    }
-
-    private boolean isQuinaDireita(byte[] indexes) {
-        byte col = indexes[1];
-        return col == 2;
-    }
-
-    private boolean isCentro(byte[] indexes) {
-        byte col = indexes[0];
-        return col == 1;
-    }
 
     public List<Estado> sucessores() {
         byte[] indexes = getIndiceColunaEmBranc();
