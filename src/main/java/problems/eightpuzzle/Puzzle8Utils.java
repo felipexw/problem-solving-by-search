@@ -1,7 +1,9 @@
+package problems.eightpuzzle;
+
 /**
  * Created by Appio on 20/03/2017.
  */
-public class CalculaSucessores8Puzzle {
+public class Puzzle8Utils {
     private static final byte BRANCO = 0;
 
     public static byte[] getIndiceColunaEmBranc(byte[][] estado) {
@@ -25,7 +27,7 @@ public class CalculaSucessores8Puzzle {
     }
 
     public static boolean isCentro(byte[] indexes) {
-        byte col = indexes[1];
-        return col == 1;
+        byte lin = indexes[0];
+        return lin == 1;
     }
 }

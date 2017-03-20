@@ -42,24 +42,15 @@ public class Estado8Puzzle implements Estado {
 
 
     public List<Estado> sucessores() {
-        byte[] indexes = getIndiceColunaEmBranc();
+        byte indexes[] = Puzzle8Utils.getIndiceColunaEmBranc(estado);
 
-        if (indexes[0] == indexes[1]) {
-            if (indexes[0] == 0) {
-                //gera sucessores a para baixo e para direita
-            } else if (indexes[0] == 1) {
-                //gera sucessores a para baixo e para cima, para esquerda e para a direita
-            } else if (indexes[0] == 2) {
-                //gera sucessores a para cima e para esquerda
-            }
-        } else {
-
-            if (indexes[1] == 1) {
-                // anda para esquerda, direita e para baixo
-            } else if (indexes[1] == 2) {
-                // anda para esquerda, e para baixo
+        if (Puzzle8Utils.isQuinaEsquerda(indexes)){
+            if (Puzzle8Utils.isCentro(indexes)){
+                //troca o de cima e o de baixo
             }
         }
+
+
 
         return null;
     }
