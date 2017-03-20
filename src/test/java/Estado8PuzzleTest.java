@@ -57,4 +57,18 @@ public class Estado8PuzzleTest {
         assertThat(calculaSucessores.isQuinaDireita(new byte[]{3,1})).isEqualTo(true);
     }
 
+    @Test
+    public void deveria_encontrar_todos_os_valores_no_centro() {
+        assertThat(calculaSucessores.isCentro(new byte[]{1,1})).isEqualTo(true);
+        assertThat(calculaSucessores.isCentro(new byte[]{2,1})).isEqualTo(true);
+        assertThat(calculaSucessores.isCentro(new byte[]{3,1})).isEqualTo(true);
+    }
+
+    @Test(expected = AssertionError.class)
+    public void deveria_lancar_uma_excao_ao_procurar_valores_no_centro() {
+        assertThat(calculaSucessores.isCentro(new byte[]{1,1})).isEqualTo(true);
+        assertThat(calculaSucessores.isCentro(new byte[]{2,0})).isEqualTo(true);
+        assertThat(calculaSucessores.isCentro(new byte[]{3,3})).isEqualTo(true);
+    }
+
 }

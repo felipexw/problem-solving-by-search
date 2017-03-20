@@ -25,7 +25,7 @@ public class CalculaSucessores8Puzzle {
     }
 
     public boolean isCentro(byte[] indexes) {
-        byte col = indexes[0];
+        byte col = indexes[1];
         return col == 1;
     }
 }
