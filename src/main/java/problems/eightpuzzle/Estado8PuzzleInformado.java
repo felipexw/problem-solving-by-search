@@ -1,5 +1,6 @@
 package problems.eightpuzzle;
 
+import core.busca.BuscaHeuristica;
 import core.busca.Heuristica;
 
 /**
