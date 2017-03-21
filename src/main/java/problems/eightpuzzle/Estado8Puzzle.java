@@ -13,7 +13,7 @@ import java.util.List;
 public class Estado8Puzzle implements Estado, Heuristica {
 
     protected byte BRANCO = 0;
-    protected byte[][] estadoMeta = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}};
+    protected byte[][] estadoMeta = {{1, 2, 3}, {4, 0, 5}, {6, 7, 8}};
     protected final byte[][] estado;
     protected byte dimensao;
 
@@ -59,6 +59,22 @@ public class Estado8Puzzle implements Estado, Heuristica {
         sucessores.add(new Estado8Puzzle(novo, estadoMeta));
     }
 
+    private void addSucessoresADireita(byte lin, byte col, List<Estado> sucessores) {
+        addSucessores(lin, col, lin, (byte) (col + 1), sucessores);
+    }
+
+    private void addSucessoresAEsquerda(byte lin, byte col, List<Estado> sucessores) {
+        addSucessores(lin, col, lin, (byte) ((byte) col - 1), sucessores);
+    }
+
+    private void addSucessoresACima(byte lin, byte col, List<Estado> sucessores) {
+        addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
+    }
+
+    private void addSucessoresAbaixo(byte lin, byte col, List<Estado> sucessores) {
+        addSucessores(lin, col, (byte) ((byte) lin + 1), col, sucessores);
+    }
+
     public List<Estado> geraSucessores(byte[][] estado) {
         byte indexes[] = Puzzle8Utils.getIndiceColunaEmBranc(estado);
         byte lin = indexes[0];
@@ -68,81 +84,42 @@ public class Estado8Puzzle implements Estado, Heuristica {
 
         if (Puzzle8Utils.isLadoEsquerdo(indexes)) {
             if (Puzzle8Utils.isLinhaCentro(indexes)) {
-                //troca o de cima
-                addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
-
-                //e o de baixo
-                addSucessores(lin, col, (byte) ((byte) lin + 1), col, sucessores);
-
-                //e o da direita
-                addSucessores(lin, col, lin, (byte) (col + 1), sucessores);
+                addSucessoresACima(lin, col, sucessores);
+                addSucessoresAbaixo(lin, col, sucessores);
+                addSucessoresADireita(lin, col, sucessores);
             } else if (Puzzle8Utils.isLinhaInferior(indexes)) {
-                //troca o de cima
-                addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
-
-                //e e o da direita
-                addSucessores(lin, col, lin, (byte) ((byte) col + 1), sucessores);
+                addSucessoresACima(lin, col, sucessores);
+                addSucessoresADireita(lin, col, sucessores);
             } else {
-                //troca o de baixo
-                addSucessores(lin, col, (byte) ((byte) lin + 1), col, sucessores);
-
-                //e da direita
-                addSucessores(lin, col, lin, (byte) ((byte) col + 1), sucessores);
+                addSucessoresAbaixo(lin, col, sucessores);
+                addSucessoresADireita(lin, col, sucessores);
             }
         } else if (Puzzle8Utils.isLadoDireito(indexes)) {
             if (Puzzle8Utils.isLinhaCentro(indexes)) {
-                //troca o de cima
-                addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
-
-                // e o de baixo
-                addSucessores(lin, col, (byte) ((byte) lin + 1), col, sucessores);
-
-                // e o da esquerda
-                addSucessores(lin, col, lin, (byte) ((byte) col - 1), sucessores);
+                addSucessoresACima(lin, col, sucessores);
+                addSucessoresAbaixo(lin, col, sucessores);
+                addSucessoresAEsquerda(lin, col, sucessores);
             } else if (Puzzle8Utils.isLinhaInferior(indexes)) {
-                //troca o de cima
-                addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
-
-                // e e o da esquerda
-                addSucessores(lin, col, lin, (byte) ((byte) col - 1), sucessores);
+                addSucessoresACima(lin, col, sucessores);
+                addSucessoresAEsquerda(lin, col, sucessores);
             } else {
-                //troca o de baixo
-                addSucessores(lin, col, (byte) ((byte) lin + 1), col, sucessores);
-
-                // e da esquerda
-                addSucessores(lin, col, lin, (byte) ((byte) col - 1), sucessores);
+                addSucessoresAbaixo(lin, col, sucessores);
+                addSucessoresAEsquerda(lin, col, sucessores);
             }
         } else {
             if (Puzzle8Utils.isLinhaCentro(indexes)) {
-                //troca o de cima,
-                addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
-
-                // de baixo,
-                addSucessores(lin, col, (byte) ((byte) lin + 1), col, sucessores);
-
-                // e da esquerda
-                addSucessores(lin, col, lin, (byte) ((byte) col - 1), sucessores);
-
-                // e da direita
-                addSucessores(lin, col, lin, (byte) ((byte) col + 1), sucessores);
+                addSucessoresACima(lin, col, sucessores);
+                addSucessoresAbaixo(lin, col, sucessores);
+                addSucessoresAEsquerda(lin, col, sucessores);
+                addSucessoresADireita(lin, col, sucessores);
             } else if (Puzzle8Utils.isLinhaInferior(indexes)) {
-                //troca o de cima,
-                addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
-
-                // da esquerda
-                addSucessores(lin, col, lin, (byte) ((byte) col - 1), sucessores);
-
-                // e da direita
-                addSucessores(lin, col, lin, (byte) ((byte) col + 1), sucessores);
+                addSucessoresACima(lin, col, sucessores);
+                addSucessoresAEsquerda(lin, col, sucessores);
+                addSucessoresADireita(lin, col, sucessores);
             } else {
-                //troca o de baixo,
-                addSucessores(lin, col, (byte) ((byte) lin + 1), col, sucessores);
-
-                // esquerda
-                addSucessores(lin, col, lin, (byte) ((byte) col - 1), sucessores);
-
-                // e direita
-                addSucessores(lin, col, lin, (byte) ((byte) col + 1), sucessores);
+                addSucessoresAbaixo(lin, col, sucessores);
+                addSucessoresAEsquerda(lin, col, sucessores);
+                addSucessoresADireita(lin, col, sucessores);
             }
         }
 
@@ -159,7 +136,7 @@ public class Estado8Puzzle implements Estado, Heuristica {
     }
 
     public static void main(String[] args) throws Exception {
-        Estado inicial = new Estado8PuzzleInformado(new byte[][]{{7, 2, 4}, {5, 0, 6}, {8, 3, 1}});
+        Estado inicial = new Estado8Puzzle(new byte[][]{{7, 2, 4}, {5, 0, 6}, {8, 3, 1}});
         System.out.println("Estado inicial:" + inicial + "\n");
 
 //        core.busca.Nodo n = new core.busca.BuscaIterativo(new core.busca.MostraStatusConsole()).busca(inicial);
