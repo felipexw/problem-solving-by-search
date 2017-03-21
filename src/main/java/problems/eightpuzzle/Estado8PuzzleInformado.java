@@ -8,7 +8,8 @@ import core.busca.Heuristica;
 public class Estado8PuzzleInformado extends Estado8Puzzle implements Heuristica {
 
 
-    public Estado8PuzzleInformado() {
+    public Estado8PuzzleInformado(byte[][] estado) {
+        super(estado);
     }
 
     public int h() {

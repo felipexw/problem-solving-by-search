@@ -13,10 +13,11 @@ public class Estado8Puzzle implements Estado {
 
     protected byte BRANCO = 0;
     protected byte[][] estadoMeta = {{0,1,2}, {3,4,5}, {6,7,8}};
-    protected byte[][] estado = {{1,0,2}, {3,4,5}, {6,7,8}};
+    protected final byte[][] estado;
     protected byte dimensao;
 
-    public Estado8Puzzle() {
+    public Estado8Puzzle(byte[][] estado) {
+        this.estado = estado;
     }
 
     public Estado8Puzzle(byte[][] estadoInicial, byte[][] estadoMeta) {
@@ -24,22 +25,7 @@ public class Estado8Puzzle implements Estado {
         this.estadoMeta = estadoMeta;
     }
 
-    private void init() {
-        estado = new byte[dimensao][dimensao];
-        estadoMeta = new byte[dimensao][dimensao];
 
-        java.util.Random random = new java.util.Random();
-
-        byte count = 0;
-
-        for (byte i = 0; i < dimensao; i++) {
-            for (byte j = 0; j < dimensao; j++) {
-                estado[i][j] = (byte) random.nextInt(dimensao);
-                estadoMeta[i][j] = count;
-                count++;
-            }
-        }
-    }
 
     public String getDescricao() {
         return "8 quebra cabeças";
@@ -62,17 +48,18 @@ public class Estado8Puzzle implements Estado {
 
     public byte[][] geraNovaMatriz(byte  linhaAntiga, byte colunaAntiga, byte novaLinha, byte novaColuna) {
         byte[][] novo = new byte[estado.length][estado.length];
-        System.arraycopy(estado, 0, novo, 0, estado.length);
+        Puzzle8Utils.copy(estado, novo);
 
-        byte atual = novo[linhaAntiga][colunaAntiga];
+        byte atual = novo[novaLinha][novaColuna];
         novo[novaLinha][novaColuna] = 0;
-        novo[novaLinha][novaColuna] = atual;
+        novo[linhaAntiga][colunaAntiga] = atual;
 
         return novo;
     }
 
-    private void addSucessores(byte linhaAntiga, byte colunaAntiga, byte novaLinha, byte novaColuna, List<Estado> sucessores) {
 
+
+    private void addSucessores(byte linhaAntiga, byte colunaAntiga, byte novaLinha, byte novaColuna, List<Estado> sucessores) {
         byte[][] novo = geraNovaMatriz(linhaAntiga, colunaAntiga, novaLinha, novaColuna);
         sucessores.add(new Estado8Puzzle(novo, estadoMeta));
     }
@@ -173,7 +160,7 @@ public class Estado8Puzzle implements Estado {
     }
 
     public static void main(String[] args) throws Exception {
-        Estado inicial = new Estado8PuzzleInformado();
+        Estado inicial = new Estado8PuzzleInformado(new byte[][] {{7,2,4}, {5,0,6}, {8,3,1}});
         System.out.println("Estado inicial:" + inicial + "\n");
 
         core.busca.Nodo n = new core.busca.BuscaIterativo(new core.busca.MostraStatusConsole()).busca(inicial);

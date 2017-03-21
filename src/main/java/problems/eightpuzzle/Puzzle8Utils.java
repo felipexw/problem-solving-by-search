@@ -40,4 +40,12 @@ public class Puzzle8Utils {
         byte lin = indexes[0];
         return lin == 0;
     }
+
+    public static void copy(byte[][] origin, byte[][] dest){
+        for(byte i =0;  i< origin.length; i++){
+            for(byte j =0; j < dest.length; j++){
+                dest[i][j] =origin[i][j];
+            }
+        }
+    }
 }
