@@ -82,24 +82,24 @@ public class Estado8Puzzle implements Estado, Heuristica {
 
         List<Estado> sucessores = new ArrayList<Estado>();
 
-        if (Puzzle8Utils.isLadoEsquerdo(indexes)) {
-            if (Puzzle8Utils.isLinhaCentro(indexes)) {
+        if (Puzzle8Utils.isColunaEsquerda(col)) {
+            if (Puzzle8Utils.isLinhaCentro(lin)) {
                 addSucessoresACima(lin, col, sucessores);
                 addSucessoresAbaixo(lin, col, sucessores);
                 addSucessoresADireita(lin, col, sucessores);
-            } else if (Puzzle8Utils.isLinhaInferior(indexes)) {
+            } else if (Puzzle8Utils.isLinhaInferior(lin)) {
                 addSucessoresACima(lin, col, sucessores);
                 addSucessoresADireita(lin, col, sucessores);
             } else {
                 addSucessoresAbaixo(lin, col, sucessores);
                 addSucessoresADireita(lin, col, sucessores);
             }
-        } else if (Puzzle8Utils.isLadoDireito(indexes)) {
-            if (Puzzle8Utils.isLinhaCentro(indexes)) {
+        } else if (Puzzle8Utils.isColunaDireita(col)) {
+            if (Puzzle8Utils.isLinhaCentro(lin)) {
                 addSucessoresACima(lin, col, sucessores);
                 addSucessoresAbaixo(lin, col, sucessores);
                 addSucessoresAEsquerda(lin, col, sucessores);
-            } else if (Puzzle8Utils.isLinhaInferior(indexes)) {
+            } else if (Puzzle8Utils.isLinhaInferior(lin)) {
                 addSucessoresACima(lin, col, sucessores);
                 addSucessoresAEsquerda(lin, col, sucessores);
             } else {
@@ -107,12 +107,12 @@ public class Estado8Puzzle implements Estado, Heuristica {
                 addSucessoresAEsquerda(lin, col, sucessores);
             }
         } else {
-            if (Puzzle8Utils.isLinhaCentro(indexes)) {
+            if (Puzzle8Utils.isLinhaCentro(lin)) {
                 addSucessoresACima(lin, col, sucessores);
                 addSucessoresAbaixo(lin, col, sucessores);
                 addSucessoresAEsquerda(lin, col, sucessores);
                 addSucessoresADireita(lin, col, sucessores);
-            } else if (Puzzle8Utils.isLinhaInferior(indexes)) {
+            } else if (Puzzle8Utils.isLinhaInferior(lin)) {
                 addSucessoresACima(lin, col, sucessores);
                 addSucessoresAEsquerda(lin, col, sucessores);
                 addSucessoresADireita(lin, col, sucessores);

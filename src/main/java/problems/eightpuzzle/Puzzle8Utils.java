@@ -16,29 +16,20 @@ public class Puzzle8Utils {
         throw new IllegalArgumentException("Não há células em branco");
     }
 
-    public static boolean isLadoEsquerdo(byte[] indexes) {
-        byte col = indexes[1];
+    public static boolean isColunaEsquerda(byte col) {
         return col == 0;
     }
 
-    public static boolean isLadoDireito(byte[] indexes) {
-        byte col = indexes[1];
+    public static boolean isColunaDireita(byte col) {
         return col == 2;
     }
 
-    public static boolean isLinhaCentro(byte[] indexes) {
-        byte lin = indexes[0];
+    public static boolean isLinhaCentro(byte lin) {
         return lin == 1;
     }
 
-    public static boolean isLinhaInferior(byte[] indexes) {
-        byte lin = indexes[0];
+    public static boolean isLinhaInferior(byte lin) {
         return lin == 2;
-    }
-
-    public static boolean isLinhaSuperior(byte[] indexes) {
-        byte lin = indexes[0];
-        return lin == 0;
     }
 
     public static void copy(byte[][] origin, byte[][] dest){
