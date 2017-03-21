@@ -68,4 +68,34 @@ public class Estado8PuzzleTest {
         assertThat(Puzzle8Utils.isCentro(new byte[]{3,3})).isEqualTo(true);
     }
 
+
+    //topo, bottom e centro
+
+    @Test
+    public void deveria_encontrar_todos_os_valores_que_estao_no_fundo_da_matriz(){
+        assertThat(Puzzle8Utils.isFundo(new byte[]{2,1})).isEqualTo(true);
+        assertThat(Puzzle8Utils.isFundo(new byte[]{2,0})).isEqualTo(true);
+        assertThat(Puzzle8Utils.isFundo(new byte[]{2,3})).isEqualTo(true);
+    }
+
+    @Test(expected = AssertionError.class)
+    public void deveria_lancar_execao_ao_procurar_os_valores_que_estao_no_fundo_da_matriz(){
+        assertThat(Puzzle8Utils.isFundo(new byte[]{1,1})).isEqualTo(true);
+        assertThat(Puzzle8Utils.isFundo(new byte[]{2,0})).isEqualTo(true);
+        assertThat(Puzzle8Utils.isFundo(new byte[]{0,3})).isEqualTo(true);
+    }
+
+    @Test(expected = AssertionError.class)
+    public void deveria_lancar_execao_ao_procurar_os_valores_que_estao_no_topo_da_matriz(){
+        assertThat(Puzzle8Utils.isTopo(new byte[]{1,1})).isEqualTo(true);
+        assertThat(Puzzle8Utils.isTopo(new byte[]{2,0})).isEqualTo(true);
+        assertThat(Puzzle8Utils.isTopo(new byte[]{3,3})).isEqualTo(true);
+    }
+
+    @Test
+    public void deveria_encontrar_todos_os_valores_que_estao_no_topo_da_matriz(){
+        assertThat(Puzzle8Utils.isTopo(new byte[]{0,0})).isEqualTo(true);
+        assertThat(Puzzle8Utils.isTopo(new byte[]{0,3})).isEqualTo(true);
+        assertThat(Puzzle8Utils.isTopo(new byte[]{0,2})).isEqualTo(true);
+    }
 }

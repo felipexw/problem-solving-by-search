@@ -30,4 +30,14 @@ public class Puzzle8Utils {
         byte lin = indexes[0];
         return lin == 1;
     }
+
+    public static boolean isFundo(byte[] indexes) {
+        byte lin = indexes[0];
+        return lin == 2;
+    }
+
+    public static boolean isTopo(byte[] indexes) {
+        byte lin = indexes[0];
+        return lin == 0;
+    }
 }
