@@ -16,27 +16,27 @@ public class Puzzle8Utils {
         throw new IllegalArgumentException("Não há células em branco");
     }
 
-    public static boolean isQuinaEsquerda(byte[] indexes) {
+    public static boolean isLadoEsquerdo(byte[] indexes) {
         byte col = indexes[1];
         return col == 0;
     }
 
-    public static boolean isQuinaDireita(byte[] indexes) {
+    public static boolean isLadoDireito(byte[] indexes) {
         byte col = indexes[1];
         return col == 2;
     }
 
-    public static boolean isCentro(byte[] indexes) {
+    public static boolean isLinhaCentro(byte[] indexes) {
         byte lin = indexes[0];
         return lin == 1;
     }
 
-    public static boolean isFundo(byte[] indexes) {
+    public static boolean isLinhaInferior(byte[] indexes) {
         byte lin = indexes[0];
         return lin == 2;
     }
 
-    public static boolean isTopo(byte[] indexes) {
+    public static boolean isLinhaSuperior(byte[] indexes) {
         byte lin = indexes[0];
         return lin == 0;
     }

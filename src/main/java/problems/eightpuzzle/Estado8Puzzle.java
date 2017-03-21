@@ -1,7 +1,6 @@
 package problems.eightpuzzle;
 
 import core.busca.Estado;
-import core.busca.Nodo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,9 @@ public class Estado8Puzzle implements Estado {
         this.estadoMeta = estadoMeta;
     }
 
-
+    public byte[][] getEstado() {
+        return estado;
+    }
 
     public String getDescricao() {
         return "8 quebra cabeças";
@@ -34,7 +35,6 @@ public class Estado8Puzzle implements Estado {
     public boolean ehMeta() {
         for (byte i = 0; i < estado.length; i++) {
             for (byte j = 0; j < estadoMeta.length; j++) {
-                System.out.println("(i,j) " + estado[i][j]);
                 if (estado[i][j] != estadoMeta[i][j])
                     return false;
             }
@@ -64,15 +64,15 @@ public class Estado8Puzzle implements Estado {
         sucessores.add(new Estado8Puzzle(novo, estadoMeta));
     }
 
-    public List<Estado> sucessores() {
+    public List<Estado> geraSucessores(byte[][] estado){
         byte indexes[] = Puzzle8Utils.getIndiceColunaEmBranc(estado);
         byte lin = indexes[0];
         byte col = indexes[1];
 
         List<Estado> sucessores = new ArrayList<Estado>();
 
-        if (Puzzle8Utils.isQuinaEsquerda(indexes)) {
-            if (Puzzle8Utils.isCentro(indexes)) {
+        if (Puzzle8Utils.isLadoEsquerdo(indexes)) {
+            if (Puzzle8Utils.isLinhaCentro(indexes)) {
                 //troca o de cima
                 addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
 
@@ -81,7 +81,7 @@ public class Estado8Puzzle implements Estado {
 
                 //e o da direita
                 addSucessores(lin, col, lin, (byte) (col + 1), sucessores);
-            } else if (Puzzle8Utils.isFundo(indexes)) {
+            } else if (Puzzle8Utils.isLinhaInferior(indexes)) {
                 //troca o de cima
                 addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
 
@@ -94,8 +94,8 @@ public class Estado8Puzzle implements Estado {
                 //e da direita
                 addSucessores(lin, col, lin, (byte) ((byte) col + 1), sucessores);
             }
-        } else if (Puzzle8Utils.isQuinaDireita(indexes)) {
-            if (Puzzle8Utils.isCentro(indexes)) {
+        } else if (Puzzle8Utils.isLadoDireito(indexes)) {
+            if (Puzzle8Utils.isLinhaCentro(indexes)) {
                 //troca o de cima
                 addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
 
@@ -104,7 +104,7 @@ public class Estado8Puzzle implements Estado {
 
                 // e o da esquerda
                 addSucessores(lin, col, lin, (byte) ((byte) col - 1), sucessores);
-            } else if (Puzzle8Utils.isFundo(indexes)) {
+            } else if (Puzzle8Utils.isLinhaInferior(indexes)) {
                 //troca o de cima
                 addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
 
@@ -118,7 +118,7 @@ public class Estado8Puzzle implements Estado {
                 addSucessores(lin, col, lin, (byte) ((byte) col - 1), sucessores);
             }
         } else {
-            if (Puzzle8Utils.isCentro(indexes)) {
+            if (Puzzle8Utils.isLinhaCentro(indexes)) {
                 //troca o de cima,
                 addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
 
@@ -130,7 +130,7 @@ public class Estado8Puzzle implements Estado {
 
                 // e da direita
                 addSucessores(lin, col, lin, (byte) ((byte) col + 1), sucessores);
-            } else if (Puzzle8Utils.isFundo(indexes)) {
+            } else if (Puzzle8Utils.isLinhaInferior(indexes)) {
                 //troca o de cima,
                 addSucessores(lin, col, (byte) ((byte) lin - 1), col, sucessores);
 
@@ -151,7 +151,11 @@ public class Estado8Puzzle implements Estado {
             }
         }
 
-        return sucessores;
+        return  sucessores;
+    }
+
+    public List<Estado> sucessores() {
+       return geraSucessores(estado);
     }
 
     @Override
