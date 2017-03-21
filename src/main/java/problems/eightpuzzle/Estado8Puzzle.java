@@ -17,6 +17,10 @@ public class Estado8Puzzle implements Estado, Heuristica {
     protected final byte[][] estado;
     protected byte dimensao;
 
+    public void setEstadoMeta(byte[][] meta){
+        estadoMeta = meta;
+    }
+
     public Estado8Puzzle(byte[][] estado) {
         this.estado = estado;
     }
@@ -158,6 +162,20 @@ public class Estado8Puzzle implements Estado, Heuristica {
         return count;
     }
 
+    public int calculaDistanciaManhattan(){
+        return 0;
+    }
+
+
+    public byte[] find(byte value) {
+        for (byte i = 0; i < estadoMeta.length; i++) {
+            for (byte j = 0; j < estadoMeta.length; j++) {
+                if (estadoMeta[i][j] == value)
+                    return new byte[]{i, j};
+            }
+        }
+        throw new IllegalArgumentException("Valor não encontrado");
+    }
 
 }
 

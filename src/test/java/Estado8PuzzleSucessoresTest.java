@@ -173,9 +173,7 @@ public class Estado8PuzzleSucessoresTest
     }
 
     @Test
-    public void deveria_gerar_os_sucessores_para_a_coluna_central_linha_inferior()
-
-    {
+    public void deveria_gerar_os_sucessores_para_a_coluna_central_linha_inferior()    {
         byte[][] eI = {{1, 2, 3}, {4, 5, 6}, {7, 0, 8}};
         byte[][] e1 = {{1, 2, 3}, {4, 0, 6}, {7, 5, 8}};
         byte[][] e2 = {{1, 2, 3}, {4, 5, 6}, {0, 7, 8}};
@@ -194,6 +192,40 @@ public class Estado8PuzzleSucessoresTest
         assertThat((encontrado2)).isEqualTo(e2);
         assertThat((encontrado3)).isEqualTo(e3);
     }
+
+    @Test
+    public void deveria_calcular_a_distancia_de_manhattan_entre_o_meta_e_atual() {
+        byte[][] eI = {{1, 2, 3}, {4, 5, 6}, {7, 0, 8}};
+        Estado8Puzzle inicial = new Estado8Puzzle(eI);
+
+        int distanciaEsperada = 0;
+        int distanciaObtida = inicial.calculaDistanciaManhattan();
+
+        assertThat(distanciaObtida).isEqualTo(distanciaEsperada);
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void deveria_lancar_uma_excecao_ao_procurar_valores_invalidos(){
+        byte[][] eI = {{1, 2, 3}, {4, 5, 6}, {7, 0, 8}};
+        Estado8Puzzle inicial = new Estado8Puzzle(eI);
+
+        byte[] indices = inicial.find((byte) 20);
+    }
+
+    @Test
+    public void deveria_retornar_os_indices_de_um_valor(){
+        byte[][] eI = {{1, 2, 3}, {4, 5, 6}, {7, 0, 8}};
+        Estado8Puzzle inicial = new Estado8Puzzle(eI);
+        inicial.setEstadoMeta(eI);
+
+        byte[] indices = inicial.find((byte) 7);
+
+        assertThat(indices.length).isEqualTo(2);
+        assertThat(indices[0]).isEqualTo((byte) 2);
+        assertThat(indices[1]).isEqualTo((byte) 0);
+    }
+
 }
 
 
