@@ -272,7 +272,7 @@ public class Estado8PuzzleTest {
         inicial.setEstadoMeta(meta);
 
         int distanciaEsperada = 18;
-        int distanciaObtida = inicial.calculaDistanciaManhattan();
+        int distanciaObtida = inicial.distanciaManhattan();
 
         assertThat(distanciaObtida).isEqualTo(distanciaEsperada);
     }

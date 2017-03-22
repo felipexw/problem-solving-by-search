@@ -12,10 +12,8 @@ import java.util.List;
 
 public class Estado8Puzzle implements Estado, Heuristica {
 
-    protected byte BRANCO = 0;
-    protected byte[][] estadoMeta = {{1, 2, 3}, {4, 0, 5}, {6, 7, 8}};
+    protected byte[][] estadoMeta = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}};
     protected final byte[][] estado;
-    protected byte dimensao;
 
     public void setEstadoMeta(byte[][] meta) {
         estadoMeta = meta;
@@ -151,6 +149,10 @@ public class Estado8Puzzle implements Estado, Heuristica {
     }
 
     public int h() {
+        return distanciaManhattan();
+    }
+
+    public int countPecasForaDoLugar(){
         int count = 0;
 
         for (byte i = 0; i < estado.length; i++) {
@@ -162,7 +164,7 @@ public class Estado8Puzzle implements Estado, Heuristica {
         return count;
     }
 
-    public int calculaDistanciaManhattan() {
+    public int distanciaManhattan() {
         int distancia = 0;
 
         for (byte i = 0; i < estado.length; i++) {
