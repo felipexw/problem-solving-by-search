@@ -17,7 +17,7 @@ public class Estado8Puzzle implements Estado, Heuristica {
     protected final byte[][] estado;
     protected byte dimensao;
 
-    public void setEstadoMeta(byte[][] meta){
+    public void setEstadoMeta(byte[][] meta) {
         estadoMeta = meta;
     }
 
@@ -162,8 +162,20 @@ public class Estado8Puzzle implements Estado, Heuristica {
         return count;
     }
 
-    public int calculaDistanciaManhattan(){
-        return 0;
+    public int calculaDistanciaManhattan() {
+        int distancia = 0;
+
+        for (byte i = 0; i < estado.length; i++) {
+            for (byte j = 0; j < estado.length; j++) {
+                if (estado[i][j] != 0){
+                    byte[] indices = find(estado[i][j]);
+                    int d = (Math.abs((indices[0] - i )) + Math.abs(indices[1] -j ));
+                    distancia += d;
+                }
+            }
+        }
+
+        return distancia;
     }
 
 
