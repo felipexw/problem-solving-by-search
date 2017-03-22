@@ -152,7 +152,7 @@ public class Estado8Puzzle implements Estado, Heuristica {
         return distanciaManhattan();
     }
 
-    public int countPecasForaDoLugar(){
+    public int countPecasForaDoLugar() {
         int count = 0;
 
         for (byte i = 0; i < estado.length; i++) {
@@ -169,9 +169,9 @@ public class Estado8Puzzle implements Estado, Heuristica {
 
         for (byte i = 0; i < estado.length; i++) {
             for (byte j = 0; j < estado.length; j++) {
-                if (estado[i][j] != 0){
+                if (estado[i][j] != 0) {
                     byte[] indices = find(estado[i][j]);
-                    int d = (Math.abs((indices[0] - i )) + Math.abs(indices[1] -j ));
+                    int d = (Math.abs((indices[0] - i)) + Math.abs(indices[1] - j));
                     distancia += d;
                 }
             }
@@ -179,6 +179,7 @@ public class Estado8Puzzle implements Estado, Heuristica {
 
         return distancia;
     }
+
 
 
     public byte[] find(byte value) {
