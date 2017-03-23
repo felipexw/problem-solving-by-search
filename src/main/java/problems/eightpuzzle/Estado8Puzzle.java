@@ -134,19 +134,16 @@ public class Estado8Puzzle implements Estado, Heuristica {
 
     @Override
     public String toString() {
-        return super.toString();
+        StringBuilder strBuilder = new StringBuilder("\n Jogada: ");
+        for(byte i =0; i < estado.length; i++){
+            strBuilder.append("\n");
+            for(byte j=0; j < estado.length; j++){
+                strBuilder.append(estado[i][j] + " ");
+            }
+        }
+        return strBuilder.toString();
     }
 
-    public static void main(String[] args) throws Exception {
-        Estado inicial = new Estado8Puzzle(new byte[][]{{7, 2, 4}, {5, 0, 6}, {8, 3, 1}});
-        System.out.println("Estado inicial:" + inicial + "\n");
-
-//        core.busca.Nodo n = new core.busca.BuscaIterativo(new core.busca.MostraStatusConsole()).busca(inicial);
-        core.busca.Nodo n = new core.busca.AEstrela(new core.busca.MostraStatusConsole()).busca(inicial);
-
-        System.out.println("Solucaoo:\n" + n.getEstado() + "\n\n");
-
-    }
 
     public int h() {
         return distanciaManhattan();
@@ -181,7 +178,6 @@ public class Estado8Puzzle implements Estado, Heuristica {
     }
 
 
-
     public byte[] find(byte value) {
         for (byte i = 0; i < estadoMeta.length; i++) {
             for (byte j = 0; j < estadoMeta.length; j++) {
@@ -190,6 +186,16 @@ public class Estado8Puzzle implements Estado, Heuristica {
             }
         }
         throw new IllegalArgumentException("Valor não encontrado");
+    }
+
+    public static void main(String[] args) throws Exception {
+        Estado inicial = new Estado8Puzzle(new byte[][]{{7, 2, 4}, {5, 0, 6}, {8, 3, 1}});
+
+//        core.busca.Nodo n = new core.busca.BuscaIterativo(new core.busca.MostraStatusConsole()).busca(inicial);
+        core.busca.Nodo n = new core.busca.AEstrela(new core.busca.MostraStatusConsole()).busca(inicial);
+
+        System.out.println("Caminho: " +  n.montaCaminho());
+
     }
 
 }
