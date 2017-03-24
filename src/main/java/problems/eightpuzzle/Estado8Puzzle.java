@@ -37,6 +37,7 @@ public class Estado8Puzzle implements Estado, Heuristica {
     }
 
     public boolean ehMeta() {
+
         return h() == 0;
     }
 
@@ -135,9 +136,9 @@ public class Estado8Puzzle implements Estado, Heuristica {
     @Override
     public String toString() {
         StringBuilder strBuilder = new StringBuilder("\n Jogada: ");
-        for(byte i =0; i < estado.length; i++){
+        for (byte i = 0; i < estado.length; i++) {
             strBuilder.append("\n");
-            for(byte j=0; j < estado.length; j++){
+            for (byte j = 0; j < estado.length; j++) {
                 strBuilder.append(estado[i][j] + " ");
             }
         }
@@ -148,6 +149,7 @@ public class Estado8Puzzle implements Estado, Heuristica {
     public int h() {
         return distanciaManhattan();
     }
+
 
     public int countPecasForaDoLugar() {
         int count = 0;
@@ -169,12 +171,40 @@ public class Estado8Puzzle implements Estado, Heuristica {
                 if (estado[i][j] != 0) {
                     byte[] indices = find(estado[i][j]);
                     int d = (Math.abs((indices[0] - i)) + Math.abs(indices[1] - j));
-                    distancia += d;
+                    distancia += (2*d) - 1;
                 }
             }
         }
 
         return distancia;
+    }
+
+    public int qtdTransicoesDiretas() {
+        int qtdTransicoes = 0;
+
+        for (byte i = 0; i < estado.length; i++) {
+            for (byte j = 0; j < estado.length - 1; j++) {
+                if (estado[i][j] != 0) {
+                    byte indicesAnterior[] = find(estado[i][j]);
+                    byte linhaAnterior = indicesAnterior[0];
+                    byte colunaAnterior = indicesAnterior[1];
+
+                    byte indicesProximo[] = find(estado[i][j + 1]);
+                    byte linhaProximo = indicesProximo[0];
+                    byte colunaProximo = indicesProximo[1];
+
+                    int d = Math.abs(linhaProximo - linhaAnterior) + Math.abs(colunaProximo - colunaAnterior);
+
+//                    byte anterior = estadoMeta[linhaAnterior][colunaAnterior];
+//                    byte proximo = estadoMeta[linhaProximo][colunaProximo];
+//                    byte diferenca = (byte) Math.abs(proximo - anterior);
+                    if (d == 1)
+                        qtdTransicoes++;
+                }
+            }
+        }
+
+        return qtdTransicoes;
     }
 
 
@@ -189,12 +219,13 @@ public class Estado8Puzzle implements Estado, Heuristica {
     }
 
     public static void main(String[] args) throws Exception {
-        Estado inicial = new Estado8Puzzle(new byte[][]{{7, 2, 4}, {5, 0, 6}, {8, 3, 1}});
+        Estado inicial = new Estado8Puzzle(new byte[][]{{8, 2, 4}, {5, 0, 6}, {8, 3, 1}});
+
 
 //        core.busca.Nodo n = new core.busca.BuscaIterativo(new core.busca.MostraStatusConsole()).busca(inicial);
         core.busca.Nodo n = new core.busca.AEstrela(new core.busca.MostraStatusConsole()).busca(inicial);
 
-        System.out.println("Caminho: " +  n.montaCaminho());
+        System.out.println("Caminho: " + n.montaCaminho());
 
     }
 
