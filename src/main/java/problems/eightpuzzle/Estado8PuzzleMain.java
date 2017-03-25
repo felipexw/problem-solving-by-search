@@ -12,8 +12,8 @@ public class Estado8PuzzleMain {
     private static final byte NIVEL_MEDIO = 2;
     private static final byte NIVEL_DIFICIL = 3;
 
-    private static final byte BUSCA_EM_PROFUNDIDADE_ITERATIVA = 1;
-    private static final byte BUSCA_EM_LARGURA = 2;
+    private static final byte BUSCA_EM_LARGURA = 1;
+    private static final byte BUSCA_EM_PROFUNDIDADE_ITERATIVA = 2;    
     private static final byte BUSCA_A_ESTRELA = 3;
 
     public static void main(String[] args) throws Exception {
@@ -28,26 +28,26 @@ public class Estado8PuzzleMain {
         byte continua = 1;
 
         do {
-            System.out.println("Selecione o nível de complexidade do problema:  + " +
-                    "\n 1 - fácil" +
-                    "\n 2 - médio" +
-                    "\n 3 - difícil" +
+            System.out.println("Selecione o nivel de complexidade do problema:  + " +
+                    "\n 1 - facil" +
+                    "\n 2 - medio" +
+                    "\n 3 - dificil" +
                     "\n 0 - Finalizar");
 
             opcaoComplexidade = in.nextByte();
 
-            System.out.println("Selecione um método de busca para resolver o problema escolhido:  + " +
+            System.out.println("Selecione um metodo de busca para resolver o problema escolhido:  + " +
                     "\n 1 - largura (cega) " +
                     "\n 2 - profundidade iterativa (cega)" +
-                    "\n 3 - A* (heurística)" +
+                    "\n 3 ou qualquer valor - A* (heuristica)"+                    
                     "\n 0 - Finalizar");
             opcaoMetodo = in.nextByte();
 
             if (opcaoMetodo == BUSCA_A_ESTRELA) {
-                System.out.print("Selecione a heurística a ser utilizada:" +
-                        "\n h1 contar a quantidade de casas fora do lugar em relação ao meta" +
-                        "\n h2 - distância de manhattan (quantidade de movimentos necessários para chegar até o meta) | Domina h1, ou seja, h2 > h1" +
-                        "\n h3 - distância de mahanttan considerando a quantidade de transições das peças adjancentes | Domina h2, ou seja, h3 > h2" +
+                System.out.print("Selecione a heuristica a ser utilizada:" +
+                        "\n - 1 contar a quantidade de casas fora do lugar em relacao ao meta" +
+                        "\n - 2 - distancia de manhattan (quantidade de movimentos necessários para chegar ate o meta) | Domina h1, ou seja, h2 > h1" +
+                        "\n - 3 - distancia de mahanttan considerando a quantidade de transicoes das pecas adjancentes | Domina h2, ou seja, h3 > h2" +
                         "\n 0 - Finalizar");
                 opcaoHeuristica = in.nextByte();
             }
@@ -89,11 +89,20 @@ public class Estado8PuzzleMain {
             case NIVEL_FACIL:
                 return new byte[][]{{1, 2, 0}, {3, 4, 5}, {6, 7, 8}};
 
-            case NIVEL_MEDIO:
-                return new byte[][]{{7, 2, 4}, {5, 0, 6}, {8, 3, 1}};
+            case NIVEL_MEDIO:{
+            	return new byte[][]{{8, 7, 6}, {5, 4, 0}, {3, 2, 1}};
+//              return new byte[][]{{7, 2, 4}, {5, 0, 6}, {8, 3, 1}};
+//            	return new byte[][]{{0, 2, 1}, {3, 4, 5}, {6, 7, 8}}; 
+            	
+            }
 
-            case NIVEL_DIFICIL:
-                return new byte[][]{{8, 7, 6}, {5, 4, 0}, {3, 2, 1}};
+
+            case NIVEL_DIFICIL:{
+//            	return new byte[][]{{8, 3, 2}, {1, 5, 4}, {6, 7, 0}};
+            	
+            	return new byte[][]{{8, 5, 7}, {6, 2, 3}, {0, 4, 1}};
+            }
+                
 
             default:
                 return new byte[][]{{1, 2, 0}, {3, 4, 5}, {6, 7, 8}};

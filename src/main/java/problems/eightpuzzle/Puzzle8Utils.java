@@ -13,7 +13,7 @@ public class Puzzle8Utils {
                     return new byte[]{i, j};
             }
         }
-        throw new IllegalArgumentException("Não há células em branco");
+        throw new IllegalArgumentException("Nao ha� colunas em branco");
     }
 
     public static boolean isColunaEsquerda(byte col) {
